@@ -19,7 +19,7 @@
 \author{ECON 6343: Econometrics III\\
 Prof. Tyler Ransom\\
 University of Oklahoma}
-\date{Due: August 27, 9:00 AM}
+\date{}%{Due: August 27, 9:00 AM}
 
 \maketitle
 Directions: Answer all questions. Each student must turn in their own copy, but you may work in groups. You are encouraged to use any and all Artificial Intelligence resources available to you to complete this problem set. Clearly label all answers. Show all of your code. Turn in jl-file(s), output files and writeup via GitHub. Your writeup may simply consist of comments in jl-file(s). If applicable, put the names of all group members at the top of your writeup or jl-file.
@@ -119,15 +119,15 @@ i.e., let columns 1, 5 and 6 remain stationary over time.
 \begin{enumerate}
 \item Load \texttt{firstmatrix.jld}.
 \item Write a function called \texttt{matrixops} that takes as inputs the matrices $A$ and $B$ from question (a) of problem 1 and has three outputs: \emph{(i)} the element-by-element product of the inputs, \emph{(ii)} the product $A^{\prime}B$, and \emph{(iii)} the sum of all the elements of $A+B$.
-\item Starting on line 2 of the function, write a comment that explains what \texttt{matrixops} does.
+\item Starting on the line above the function, write a docstring that explains what \texttt{matrixops} does. Follow Julia best practices \href{https://docs.julialang.org/en/v1/manual/documentation/}{here}.
 \item Evaluate \texttt{matrixops()} using $A$ and $B$ from question (a) of problem 1
-\item Just before the first executable line of \texttt{matrixops.m} (i.e. right after the first-line comments), write an if statement which gives an error if the two inputs are not the same size. Have the error say ``inputs must have the same size.''
-\item Evaluate \texttt{matrixops.m} using $C$ and $D$ from question (a) of problem 1. What happens?
-\item Now evaluate \texttt{matrixops.m} using \texttt{ttl\_exp} and \texttt{wage} from \texttt{nlsw88\_processed.csv}. Hint: before doing this, you will need to convert the data frame columns to Arrays. e.g. \texttt{convert(Array,nlsw88.ttl\_exp)}, depending on what you called the data frame object [I called it \texttt{nlsw88}].
+\item Just after the function definition line of \texttt{matrixops()}, write an if statement which gives an error if the two inputs are not the same size. Have the error say ``inputs must have the same size.'' You may also elect to add a type check to the inputs of the function, e.g. \texttt{function matrixops(A::Array\{Float64\},B::Array\{Float64\})}.
+\item Evaluate \texttt{matrixops()} using $C$ and $D$ from question (a) of problem 1. What happens?
+\item Now evaluate \texttt{matrixops()} using \texttt{ttl\_exp} and \texttt{wage} from \texttt{nlsw88\_processed.csv}. Hint: before doing this, you will need to convert the data frame columns to Arrays. e.g. \texttt{convert(Array,nlsw88.ttl\_exp)}, depending on what you called the data frame object [I called it \texttt{nlsw88}].
 \item Wrap a function definition around all of the code for question 4. Call the function \texttt{q4()}. The function should have no inputs or outputs. At the very bottom of your script you should add the code \texttt{q4()}.
 \end{enumerate}
 
-\item Write unit tests for each of the functions you've created and run them to verify that they work as expected. AIs are great at writing unit tests for you.
+\item Write unit tests for each of the functions you've created and run them to verify that they work as expected. AIs are great at writing unit tests for you. Best practice is to provide unit tests in a separate script that first reads in the source code before running the tests.
 
 \item Turn in your files as a commit to the \texttt{ProblemSets/PS1-julia-intro/} folder on your GitHub fork. You can do this by simply clicking ``upload files'' in the appropriate folder, or you can use the GitHub desktop app, RStudio, VS Code, or the command line to stage, commit and push the files. If you are having trouble, AIs are great at git.
 \end{enumerate}
