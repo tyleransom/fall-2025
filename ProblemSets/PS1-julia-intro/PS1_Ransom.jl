@@ -199,6 +199,8 @@ function q3()
     df = DataFrame(CSV.File("nlsw88.csv"))
     @show df[1:5, :]
     @show typeof(df[:, :grade])
+    # save as cleaned CSV file
+    CSV.write("nlsw88_cleaned.csv", df)
 
     #-------------------------------------------------------------------------------
     # Question 3, part (b)
@@ -238,13 +240,67 @@ function q3()
     return nothing
 end
 
+# part (b) and (c) of question 4
+"""
+matrixops(A, B)
+Performs the following operations on matrices A and B:
+1. Computes the element-wise product of A and B.
+2. Computes the matrix product of the transpose of A and B.
+3. Computes the sum of all elements of the sum of A and B.
+"""
+function matrixops(A::Array{Float64}, B::Array{Float64})
+    # part (e) of question 4: check dimension compatibility
+    if size(A) != size(B)
+        error("Matrices A and B must have the same dimensions for element-wise operations.")
+    end
+    # (i) element-wise product of A and B
+    out1 = A .* B 
+    # (ii) matrix product of A' and B
+    out2 = A' * B
+    # (iii) sum of all elements of sum of A and B
+    out3 = sum(A + B)
+    return out1, out2, out3
+end
+
+function q4()
+    # part (a) of question 4
+    # three ways to load the .jld file
+    # load("matrixpractice.jld", "A", A, "B", B, "C", C, "D", D, "E", E, "F", F, "G", G)
+    # @load "matrixpractice.jld" A B C D E F G
+    @load "matrixpractice.jld"
+    
+    # part (d) of question 4
+    matrixops(A, B)
+    
+    # part (f) of question 4
+    try 
+        matrixops(C, D) 
+    catch e
+        println("Trying matrixops(C, D):")
+        println(e)
+    end
+    
+    # part (g) of question 4
+    # read in processed CSV file
+    nlsw88  = DataFrame(CSV.File("nlsw88_cleaned.csv"))
+    ttl_exp = convert(Array, nlsw88.ttl_exp)
+    wage    = convert(Array, nlsw88.wage)
+    matrixops(ttl_exp, wage)
+
+    return nothing
+end
+
+
+
 # call the function from q1
 A, B, C, D = q1()
 
 # call the function from q2
 q2(A, B, C)
 
+# call the function from q3
 q3()
 
-
+# call the function from q4
+q4()
 
